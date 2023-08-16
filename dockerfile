@@ -1,9 +1,14 @@
-FROM golang:latest AS build
+FROM golang:alpine AS build
 WORKDIR /app
 COPY go.mod go.sum .
 RUN go mod download
+RUN apk add --no-cache \
+    # Important: required for go-sqlite3
+    gcc \
+    # Required for Alpine
+    musl-dev
 COPY . .
-RUN CGO_ENABLED=0 go build -o main main.go
+RUN CGO_ENABLED=1 go build -o main main.go
 
 FROM alpine:latest
 WORKDIR /

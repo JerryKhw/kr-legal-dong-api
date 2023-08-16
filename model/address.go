@@ -7,34 +7,22 @@ type Si struct {
 }
 
 type Gu struct {
-	Code     string `json:"code"`
-	SiCode   string `json:"siCode"`
-	SiName   string `json:"siName"`
-	FullName string `json:"fullName"`
-	Name     string `json:"name"`
-	Active   bool   `json:"active"`
+	Code   string `json:"code"`
+	SiCode string `json:"siCode"`
+	Name   string `json:"name"`
+	Active bool   `json:"active"`
 }
 
 type Dong struct {
-	Code     string `json:"code"`
-	SiCode   string `json:"siCode"`
-	SiName   string `json:"siName"`
-	GuCode   string `json:"guCode"`
-	GuName   string `json:"guName"`
-	FullName string `json:"fullName"`
-	Name     string `json:"name"`
-	Active   bool   `json:"active"`
+	Code   string `json:"code"`
+	GuCode string `json:"guCode"`
+	Name   string `json:"name"`
+	Active bool   `json:"active"`
 }
 
 type Detail struct {
 	Code     string `json:"code"`
-	SiCode   string `json:"siCode"`
-	SiName   string `json:"siName"`
-	GuCode   string `json:"guCode"`
-	GuName   string `json:"guName"`
 	DongCode string `json:"dongCode"`
-	DongName string `json:"dongName"`
-	FullName string `json:"fullName"`
 	Name     string `json:"name"`
 	Active   bool   `json:"active"`
 }
