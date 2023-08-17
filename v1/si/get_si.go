@@ -11,6 +11,7 @@ import (
 // GetSi godoc
 // @Summary 시 조회
 // @Description 시 조회
+// @Param code path string true "code"
 // @Success 200 {object} model.DataResponse{data=si.GetSi.si} "success"
 // @Failure 500 {object} model.DefaultResponse "failed_select"
 // @Router /v1/si/{code} [get]

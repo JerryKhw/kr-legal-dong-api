@@ -11,6 +11,7 @@ import (
 // GetGu godoc
 // @Summary 구 조회
 // @Description 구 조회
+// @Param code path string true "code"
 // @Success 200 {object} model.DataResponse{data=gu.GetGu.gu} "success"
 // @Failure 500 {object} model.DefaultResponse "failed_select"
 // @Router /v1/gu/{code} [get]

@@ -11,6 +11,7 @@ import (
 // GetDong godoc
 // @Summary 동 조회
 // @Description 동 조회
+// @Param code path string true "code"
 // @Success 200 {object} model.DataResponse{data=dong.GetDong.dong} "success"
 // @Failure 500 {object} model.DefaultResponse "failed_select"
 // @Router /v1/dong/{code} [get]
