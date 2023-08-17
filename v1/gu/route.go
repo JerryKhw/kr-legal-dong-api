@@ -7,6 +7,7 @@ import (
 func SetRoute(rg *gin.RouterGroup) {
 	si := rg.Group("/gu")
 	{
-		si.GET("", GetGu)
+		si.GET("", GetGuList)
+		si.GET(":code", GetGu)
 	}
 }

@@ -7,6 +7,7 @@ import (
 func SetRoute(rg *gin.RouterGroup) {
 	si := rg.Group("/dong")
 	{
-		si.GET("", GetDong)
+		si.GET("", GetDongList)
+		si.GET(":code", GetDong)
 	}
 }
