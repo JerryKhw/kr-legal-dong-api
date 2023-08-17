@@ -12,7 +12,7 @@ import (
 var DB *sql.DB
 
 func init() {
-	siBytes, err := os.ReadFile("./kr-legal-dong/data/si.json")
+	siBytes, err := os.ReadFile("./kr-legal-dong/si.json")
 	if err != nil {
 		panic(err)
 	}
@@ -24,7 +24,7 @@ func init() {
 		panic(err)
 	}
 
-	guBytes, err := os.ReadFile("./kr-legal-dong/data/gu.json")
+	guBytes, err := os.ReadFile("./kr-legal-dong/gu.json")
 	if err != nil {
 		panic(err)
 	}
@@ -36,7 +36,7 @@ func init() {
 		panic(err)
 	}
 
-	dongBytes, err := os.ReadFile("./kr-legal-dong/data/dong.json")
+	dongBytes, err := os.ReadFile("./kr-legal-dong/dong.json")
 	if err != nil {
 		panic(err)
 	}
@@ -48,7 +48,7 @@ func init() {
 		panic(err)
 	}
 
-	detailBytes, err := os.ReadFile("./kr-legal-dong/data/detail.json")
+	detailBytes, err := os.ReadFile("./kr-legal-dong/detail.json")
 	if err != nil {
 		panic(err)
 	}
