@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
+	koreanregexp "github.com/JerryKhw/korean-regexp"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,10 +20,11 @@ import (
 // @Router /v1/dong [get]
 func GetDongList(c *gin.Context) {
 	type request struct {
-		SiCode  *string `form:"siCode"`
-		GuCode  *string `form:"guCode"`
-		Keyword *string `form:"keyword"`
-		Active  *string `form:"active"`
+		SiCode    *string `form:"siCode"`
+		GuCode    *string `form:"guCode"`
+		Keyword   *string `form:"keyword"`
+		Active    *string `form:"active"`
+		UseRegExp *string `form:"useRegExp"`
 	}
 
 	type dong struct {
@@ -49,8 +51,28 @@ func GetDongList(c *gin.Context) {
 	value := []any{}
 
 	if req.Keyword != nil {
-		where = append(where, "do.name LIKE ?")
-		value = append(value, "%"+*req.Keyword+"%")
+		if req.UseRegExp != nil {
+			useRegExp, err := strconv.ParseBool(*req.UseRegExp)
+
+			if err != nil {
+				c.JSON(http.StatusBadRequest, &model.DefaultResponse{
+					Message: "bad_request",
+				})
+				c.Abort()
+				return
+			}
+
+			if useRegExp {
+				where = append(where, "do.name REGEXP ?")
+				value = append(value, koreanregexp.GetRegExp(*req.Keyword, koreanregexp.GetRegExpOptions{}).String())
+			} else {
+				where = append(where, "do.name Like ?")
+				value = append(value, "%"+*req.Keyword+"%")
+			}
+		} else {
+			where = append(where, "do.name Like ?")
+			value = append(value, "%"+*req.Keyword+"%")
+		}
 	}
 
 	if req.Active != nil {

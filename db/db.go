@@ -5,11 +5,17 @@ import (
 	"encoding/json"
 	"kr-legal-dong-api/model"
 	"os"
+	"regexp"
 
+	"github.com/mattn/go-sqlite3"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 var DB *sql.DB
+
+func regex(re, s string) (bool, error) {
+	return regexp.MatchString(re, s)
+}
 
 func init() {
 	siBytes, err := os.ReadFile("./kr-legal-dong/si.json")
@@ -60,7 +66,14 @@ func init() {
 		panic(err)
 	}
 
-	DB, err = sql.Open("sqlite3", ":memory:")
+	sql.Register("sqlite3_with_go_func",
+		&sqlite3.SQLiteDriver{
+			ConnectHook: func(conn *sqlite3.SQLiteConn) error {
+				return conn.RegisterFunc("regexp", regex, true)
+			},
+		})
+
+	DB, err = sql.Open("sqlite3_with_go_func", ":memory:")
 	if err != nil {
 		panic(err)
 	}
