@@ -8,7 +8,7 @@ RUN apk add --no-cache \
     # Required for Alpine
     musl-dev
 COPY . .
-RUN CGO_ENABLED=1 go build -o main main.go
+RUN CGO_ENABLED=1 CGO_CFLAGS="-D_LARGEFILE64_SOURCE" go build -o main main.go
 
 FROM alpine:latest
 WORKDIR /
